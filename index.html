@@ -14,7 +14,7 @@
     </nav>
     <div class="col-10 offset-1">
     <div class="accordion" id="accordionExample">
-        <div class="card rounded-0">
+        <div class="rounded-bottom bg-light">
             <div class="card-header" id="headingOne">
                 <h2 class="mb-0">
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -25,7 +25,7 @@
       
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
-                    <form class="row">
+                    <form class="row" id="new-dino-form">
                         <div class="col-6">                    
                             <div class="form-group">
                                 <label for="dino-name">Name</label>
@@ -39,7 +39,6 @@
                                 <label for="dino-type">Type</label>
                                 <input type="text" class="form-control" id="dino-type" aria-describedby="typeHelp" placeholder="Enter type">
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
@@ -49,15 +48,15 @@
                             <div class="form-group">
                                 <label for="dino-image">Image</label>
                                 <input type="text" class="form-control" id="dino-image" aria-describedby="imageHelp" placeholder="Enter image URL">
-                            </div>
-                        </div>    
-                            </div>
+                            </div>    
+                        </div>
+                        <button type="submit" id="submit-new-dino" class="btn btn-primary m-3">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    </div>
       
     <h1>Dino Kennel</h1>
     <script src="./main.js"></script>
