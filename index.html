@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/bd321903b3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./main.css">
     <title>Dino Kennel</title>
 </head>
@@ -11,6 +12,52 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Dino Kennel</a>
     </nav>
+    <div class="col-10 offset-1">
+    <div class="accordion" id="accordionExample">
+        <div class="rounded-bottom bg-light">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <i class="fas fa-plus-circle"></i> Add Dino
+                    </button>
+                </h2>
+            </div>
+      
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <form class="row" id="new-dino-form">
+                        <div class="col-6">                    
+                            <div class="form-group">
+                                <label for="dino-name">Name</label>
+                                <input type="text" class="form-control" id="dino-name" aria-describedby="nameHelp" placeholder="Enter name">
+                            </div>
+                            <div class="form-group">
+                                <label for="dino-age">Age</label>
+                                <input type="number" class="form-control" id="dino-age" aria-describedby="ageHelp" placeholder="Enter age">
+                            </div>
+                            <div class="form-group">
+                                <label for="dino-type">Type</label>
+                                <input type="text" class="form-control" id="dino-type" aria-describedby="typeHelp" placeholder="Enter type">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="dino-owner">Owner</label>
+                                <input type="text" class="form-control" id="dino-owner" aria-describedby="ownerHelp" placeholder="Enter owner">
+                            </div>
+                            <div class="form-group">
+                                <label for="dino-image">Image</label>
+                                <input type="text" class="form-control" id="dino-image" aria-describedby="imageHelp" placeholder="Enter image URL">
+                            </div>    
+                        </div>
+                        <button type="submit" id="submit-new-dino" class="btn btn-primary m-3">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+      
     <h1>Dino Kennel</h1>
     <script src="./main.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
