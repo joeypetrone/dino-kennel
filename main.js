@@ -6,7 +6,7 @@ const dinos = [{
     age: 100,
     owner: 'Zoe',
     adventures: [],
-    health: 100,
+    health: 30,
     imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/61fC04pumjL._AC_SL1001_.jpg'
     },
     {
@@ -16,7 +16,7 @@ const dinos = [{
     age: 1,
     owner: 'Luke',
     adventures: [],
-    health: 1,
+    health: 30,
     imageUrl: 'https://images.immediate.co.uk/production/volatile/sites/4/2019/07/dino_dps_03-7b541f7.jpg?quality=45&resize=960,413'
     },
     {
@@ -26,7 +26,7 @@ const dinos = [{
     age: 55,
     owner: 'Mary',
     adventures: [],
-    health: 45,
+    health: 30,
     imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR241PyLQR8L218X_Cv6Y41hqC1twa871J5sYKXn8cfodBa7cmv'
     }
 ];
@@ -41,7 +41,7 @@ const viewSingleDino = (e) => {
     const dinoId = e.target.closest('.card').id;
     const selectedDino = dinos.find((x) => dinoId === x.id);
     let domString = '';
-    domString += '<div class="container rounded bg-light">';
+    domString += '<div class="container rounded bg-light pt-2 pb-3">';
     domString += '   <button id="close-single-view" class="btn btn-outline-dark single-dino float-right"><i class="fas fa-times-circle"></i></button>';
     domString += '   <div class="row">';
     domString += '       <div class="col-6">';
@@ -60,6 +60,7 @@ const viewSingleDino = (e) => {
     domString += '</div>';
 
     printToDom('kennel', '');
+    printToDom('hospital', '');
     printToDom('single-view', domString);
     document.getElementById('close-single-view').addEventListener('click', closeSingleViewEvent);    
 }
@@ -74,6 +75,7 @@ const singleDinoAddEvents = () => {
 const closeSingleViewEvent = () => {
     printToDom('single-view', '');
     printDinos(dinos);
+    hospitalDomStringBuilder(hospitalDinos);
 };
 
 const dinoHealth = (e) => {
@@ -128,12 +130,12 @@ const feedEvents = () => {
 const printDinos = (dinoArray) => {
     let domString = '';
     for (let i = 0; i < dinoArray.length; i++) {
-        domString += '<div class="col-4">';
+        domString += '<div class="col-4 dino-card mb-3">';
         domString += `  <div id="${dinoArray[i].id}" class="card">`;
-        domString += `      <img class="card-img-top dino-photo" src="${dinoArray[i].imageUrl}" alt="Card">`;
+        domString += `      <img class="card-img-top dino-photo" src="${dinoArray[i].imageUrl}" alt="Dino Card">`;
         domString += '      <div class="card-body text-center">';
         domString += `          <h5 class="card-title">${dinoArray[i].name}</h5>`;
-        domString += '          <div class="progress">';
+        domString += '          <div class="progress m-3">';
         domString += `              <div class="progress-bar bg-danger" role="progressbar" style="width: ${dinoArray[i].health}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="${dinoArray[i].health}"></div>`;
         domString += '          </div>';
         domString += '          <button class="btn btn-outline-dark feed-button"><i class="fas fa-drumstick-bite"></i></button>'
@@ -168,9 +170,51 @@ const newDino = (e) => {
     printDinos(dinos);
 };
 
+const hospitalDomStringBuilder = (dino) => {
+    let domString = '';
+
+        domString += '<div class="card bg-white m-3">';
+        domString += '<div class="card-header text-danger">';
+        domString += '  <h2><i class="fas fa-plus-square p-1"></i>Hospital</h2>';
+        domString += '</div>';
+        domString += '<div class="d-flex justify-content-center flex-wrap">';
+
+    for (let i = 0; i < dino.length; i++) {
+        domString += '<div class="col-4 hospital-card mb-3 p-2">';
+        domString += `  <div id="${dino[i].id}" class="card">`;
+        domString += `      <img class="card-img-top dino-photo" src="${dino[i].imageUrl}" alt="Dino Card">`;
+        domString += '      <div class="card-body text-center">';
+        domString += `          <h5 class="card-title">${dino[i].name}</h5>`;
+        domString += '          <div class="progress m-3">';
+        domString += `              <div class="progress-bar bg-danger" role="progressbar" style="width: ${dino[i].health}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="${dino[i].health}"></div>`;
+        domString += '          </div>';
+        domString += '          <button class="btn btn-outline-dark feed-button"><i class="fas fa-drumstick-bite"></i></button>'
+        domString += '          <button class="btn btn-outline-dark single-dino"><i class="fas fa-eye"></i></button>'
+        domString += '          <button class="btn btn-outline-danger delete-dino"><i class="fas fa-trash-alt"></i></button>'
+        domString += '      </div>';
+        domString += '  </div>';
+        domString += '</div>';
+    }
+        domString += '</div>';
+        domString += '</div>';
+    printToDom('hospital', domString);
+    //singleDinoAddEvents();
+    //petEvents();
+    //deleteEvents();
+    //feedEvents();
+};
+
+const findHospitalDinos = () => {
+    let hospitalDinos = [];
+    hospitalDinos = dinos.filter((x) => x.health < 40);
+    hospitalDomStringBuilder(hospitalDinos);
+};
+
+
 const init = () => {
     document.getElementById('submit-new-dino').addEventListener('click', newDino);
     printDinos(dinos);
+    findHospitalDinos();
 };
 
 init();
