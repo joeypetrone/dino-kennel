@@ -5,14 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/bd321903b3.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Trade+Winds&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./main.css">
     <title>Dino Kennel</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between">
         <a class="navbar-brand" href="#">Dino Kennel</a>
+        <ul class="nav justify-content-end">
+        <li class="nav-item">
+              <a class="nav-link text-light" href="#hospital">Visit Hospital</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#graveyard">Visit Graveyard</a>
+            </li>
+          </ul>
     </nav>
-    <div class="col-12 offset-0 mb-3">
+    <div class="col-12 offset-0">
     <div class="accordion" id="accordionExample">
         <div class="rounded-bottom bg-light">
             <div class="card-header" id="headingOne">
@@ -57,10 +66,11 @@
         </div>
     </div>
     </div>
-    
+
     <div id="kennel" class="d-flex justify-content-center flex-wrap"></div>
     <div id="hospital" class="d-flex justify-content-center flex-wrap"></div>
-    <div id="single-view"></div>
+    <div id="graveyard" class="d-flex justify-content-center flex-wrap"></div>
+    <div id="single-view" class="d-flex justify-content-center"></div>
 
     <footer class="text-center mb-1">©2020 by Joey Petrone</footer>
     <script src="./main.js"></script>

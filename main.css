@@ -2,6 +2,11 @@ body {
     background-color: rgb(41, 115, 138);
 }
 
+.navbar-brand {
+    font-family: 'Trade Winds';
+    font-size: 175%;
+}
+
 .dino-card {
     min-width: 320px;
 }
