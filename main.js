@@ -16,7 +16,7 @@ const dinos = [{
     age: 1,
     owner: 'Luke',
     adventures: [],
-    health: 30,
+    health: 0,
     imageUrl: 'https://images.immediate.co.uk/production/volatile/sites/4/2019/07/dino_dps_03-7b541f7.jpg?quality=45&resize=960,413'
     },
     {
@@ -43,26 +43,11 @@ const printToDom = (divId, textToPrint) => {
 const printDinos = (dinoArray, divId) => {
     let domString = '';
 
-    switch (divId) {
-        case 'kennel':
-            domString += '<div class="card bg-light m-3 w-100">';
-            domString += '<div class="card-header text-body">';
-            domString += '  <h2><i class="fas fa-home p-1"></i>Kennel</h2>';
-            domString += '</div>';
-            domString += '<div class="d-flex justify-content-center flex-wrap pt-2">';            
-            break;
-        case 'hospital':
-            domString += '<div class="card bg-white m-3 w-100">';
-            domString += '<div class="card-header text-danger">';
-            domString += '  <h2><i class="fas fa-plus-square p-1"></i>Hospital</h2>';
-            domString += '</div>';
-            domString += '<div class="d-flex justify-content-center flex-wrap pt-2">';
-            break;
-    }    
+    domString += printHeader(divId);
 
     for (let i =0; i < dinoArray.length; i++){
       domString += '<div class="col-4 dino-card mb-3">';
-      domString += `<div id="${dinoArray[i].id}" class="card">`;
+      domString += `<div id="${dinoArray[i].id}" class="card ${divId === 'graveyard' ? 'bg-secondary' : ''}">`;
       domString += `<img class="card-img-top ${divId !== 'graveyard' ? 'dino-photo' : ''}" src="${dinoArray[i].imageUrl}" alt="Card image cap">`;
       domString += '<div class="card-body text-center">';
       domString += `<h5 class="card-title">${dinoArray[i].name}</h5>`;
@@ -75,7 +60,39 @@ const printDinos = (dinoArray, divId) => {
     domString += '</div>';
     printToDom(divId, domString);
 };
-  
+
+const printHeader = (divId) => {
+    let domString = '';
+
+    switch (divId) {
+        case 'kennel':
+            domString += '<div class="card bg-light mb-1 ml-3 mr-3 mt-3 w-100">';
+            domString += '<div class="card-header text-body">';
+            domString += '  <h3><i class="fas fa-home p-2"></i>Kennel</h3>';
+            domString += '</div>';
+            domString += '<div class="d-flex justify-content-center flex-wrap pt-2">';            
+            break;
+        case 'hospital':
+            domString += '<div class="card bg-white mb-1 ml-3 mr-3 mt-3 w-100">';
+            domString += '<div class="card-header text-danger d-flex justify-content-between">';
+            domString += '  <h3><i class="fas fa-plus-square p-2"></i>Hospital</h3>';
+            domString += '  <h4><a class="nav-link text-dark p-8" href="#"><i class="fas fa-arrow-alt-circle-up"></i></a></h4>';
+            domString += '</div>';
+            domString += '<div class="d-flex justify-content-center flex-wrap pt-2">';
+            break;
+        case 'graveyard':
+            domString += '<div class="card bg-dark mb-3 ml-3 mr-3 mt-3 w-100">';
+            domString += '<div class="card-header text-light d-flex justify-content-between">';
+            domString += '  <h3><i class="fas fa-cross p-2"></i>Graveyard</h3>';
+            domString += '  <h4><a class="nav-link text-light p-8" href="#"><i class="fas fa-arrow-alt-circle-up"></i></a></h4>';
+            domString += '</div>';
+            domString += '<div class="d-flex justify-content-center flex-wrap pt-2">';
+            break;
+    }    
+
+    return domString
+};
+
 const printProgress = (dino, divId) => {
     let domString = '';
     if (divId !== 'graveyard') {
@@ -83,7 +100,7 @@ const printProgress = (dino, divId) => {
       domString += `<div class="progress-bar progress-bar ${dino.health < 40 ? 'bg-danger' : 'bg-success'}" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>`;
       domString += '</div>';
     } else {
-      domString += '<div><i class="fas fa-skull-crossbones fa-3x"></i></div>';
+      domString += '<div><i class="fas fa-skull-crossbones fa-3x mb-4"></i></div>';
     }
   
     return domString
@@ -92,12 +109,12 @@ const printProgress = (dino, divId) => {
 const printButtons = (divId) => {
     let domString = '';
     domString += '<div class="row mb-2">';
-    domString += `<div class="col-6"><button class="col-12 btn btn-outline-success feed-button ${divId === 'graveyard' ? 'disabled' : ''}"><i class="fas fa-drumstick-bite"></i></button></div>`;
-    domString += `<div class="col-6"><button class="col-12 btn btn-outline-warning adv-button ${divId === 'graveyard' ? 'disabled' : ''}"><i class="fas fa-hiking"></i></button></div>`;
+    domString += `<div class="col-6"><button class="col-12 btn btn-outline-success ${divId === 'graveyard' ? 'disabled' : 'feed-button'}"><i class="fas fa-drumstick-bite"></i></button></div>`;
+    domString += `<div class="col-6"><button class="col-12 btn btn-outline-warning ${divId === 'graveyard' ? 'disabled' : 'adv-button'}"><i class="fas fa-hiking"></i></button></div>`;
     domString += '</div>';
     domString += '<div class="row">';
     domString += `<div class="col-6"><button class="col-12 btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button></div>`;
-    domString += `<div class="col-6"><button class="col-12 btn btn-outline-danger delete-dino ${divId === 'graveyard' ? 'disabled' : ''}"><i class="far fa-trash-alt"></i></button></div>`;
+    domString += `<div class="col-6"><button class="col-12 btn btn-outline-danger ${divId === 'graveyard' ? 'disabled' : 'delete-dino'}"><i class="far fa-trash-alt"></i></button></div>`;
     domString += '</div>';
   
     return domString;
@@ -108,7 +125,7 @@ const viewSingleDino = (e) => {
     const dinoId = e.target.closest('.card').id;
     const selectedDino = dinos.find((x) => dinoId === x.id);
     let domString = '';
-    domString += '<div class="container rounded bg-light pt-2 pb-3">';
+    domString += '<div class="container rounded bg-light pt-2 pb-3 mt-3">';
     domString += '   <button id="close-single-view" class="btn btn-outline-dark single-dino float-right"><i class="fas fa-times-circle"></i></button>';
     domString += '   <div class="row">';
     domString += '       <div class="col-6">';
@@ -128,6 +145,7 @@ const viewSingleDino = (e) => {
 
     printToDom('kennel', '');
     printToDom('hospital', '');
+    printToDom('graveyard', '');
     printToDom('single-view', domString);
     document.getElementById('close-single-view').addEventListener('click', closeSingleViewEvent);    
 };
@@ -230,6 +248,12 @@ const findHospitalDinos = (dinos) => {
     printDinos(hospitalDinos, 'hospital');
 };
 
+// GRAVEYARD FUNCTION
+const findDeadDinos = (dinos) => {
+    const deadDinos = dinos.filter((x) => x.health < 1);
+    printDinos(deadDinos, 'graveyard');
+  };
+
 // INITAIL FUNCTIONS
 
 const addEvents = () => {
@@ -243,7 +267,7 @@ const addEvents = () => {
 const buildAllDinos = () => {
     findLiveHealthyDinos(dinos);
     findHospitalDinos(dinos);
-    //findDeadDinos(dinos);
+    findDeadDinos(dinos);
     addEvents();
 };
 
