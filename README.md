@@ -1,4 +1,4 @@
-#dino-kennel
+# Dino Kennel
 
 ## Description 
 This project showcases all the vanilla javascript we learned in the foundations milestones. It is designed to be a record keeping application for a dinosaur kennel.
